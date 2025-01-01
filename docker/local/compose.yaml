@@ -4,7 +4,9 @@ services:
     build:
       context: ../../
       dockerfile: docker/local/Dockerfile
-    image: chatapp
+    volumes:
+      - ../../src:/app/src
+      - ../../public:/app/public
     restart: always
     ports:
       - 3000:3000

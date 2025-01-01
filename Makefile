@@ -1,4 +1,6 @@
-LOCALCOMPOSE := ./docker/local/compose.yaml
+LOCALYAML := ./docker/local/compose.yaml
 
 local:
-	docker compose -f $(LOCALCOMPOSE) up
+	docker compose -f $(LOCALYAML) up
+local_rebuild:
+	docker compose -f $(LOCALYAML) up --build

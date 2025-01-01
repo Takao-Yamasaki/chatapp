@@ -4,7 +4,9 @@ WORKDIR /app
 
 COPY package.json package-lock.json* ./
 RUN \ 
-  if [ -f package-lock.json ]; then npm ci;fi
+  if [ -f package-lock.json ]; then npm ci \
+  else "Warning: Lockfile not found. It is recommended to commit lockfiles to version control." \
+  fi
 
 COPY src ./src
 COPY public ./public

@@ -2,14 +2,13 @@ FROM node:22.12.0-alpine
 
 WORKDIR /app
 
-COPY . .
-
+COPY package.json package-lock.json* ./
 RUN \ 
   if [ -f package-lock.json ]; then npm ci;fi
 
-RUN npm run build
-
-EXPOSE 3000
+COPY src ./src
+COPY public ./public
+COPY next.config.ts tsconfig.json postcss.config.mjs tailwind.config.ts ./
 
 CMD \
   if [ -f package-lock.json ]; then npm run dev;fi

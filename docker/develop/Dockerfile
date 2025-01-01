@@ -25,6 +25,6 @@ WORKDIR /app
 
 COPY --from=builder /app/public ./public
 # FIXME: add user & add standalone & add static
-COPY --from=builder /app/.next .
+COPY --from=builder /app/.next ./
 
 CMD ["node", "server.js"]

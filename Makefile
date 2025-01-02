@@ -1,5 +1,7 @@
 LOCALYAML := ./docker/local/compose.yaml
 DEVYAML := ./docker/develop/compose.yaml
+LOCALAPP := chatapp_local
+DEVAPP := chatapp_dev
 
 .PHONY: help
 .DEFAULT_GOAL := help
@@ -8,20 +10,20 @@ local: ## local環境でコンテナを起動
 	docker compose -f $(LOCALYAML) up -d
 build: ## local環境でコンテナをビルド
 	docker compose -f $(LOCALYAML) build --no-cache 
-ps: ## local環境でコンテナの起動状況を確認
+ps: ## local環境でコンテナの起動確認
 	docker compose -f $(LOCALYAML) ps
 login: ## local環境でコンテナに入る
-	docker compose -f $(LOCALYAML) exec -it chatapp_local sh
+	docker compose -f $(LOCALYAML) exec -it $(LOCALAPP) sh
 down: ## local環境でコンテナを停止
 	docker compose -f $(LOCALYAML) down
 dev: ## dev環境でコンテナを起動
 	docker compose -f $(DEVYAML) up -d
 dev_build: ## dev環境でコンテナをビルド
 	docker compose -f $(DEVYAML) build --no-cache
-dev_ps: ## dev環境でコンテナの起動状況を確認
+dev_ps: ## dev環境でコンテナの起動確認
 	docker compose -f $(DEVYAML) ps
 dev_login: ## dev環境でコンテナに入る
-	docker compose -f $(LOCALYAML) exec -it chatapp_dev sh
+	docker compose -f $(DEVYAML) exec -it $(DEVAPP) sh
 dev_down: ## dev環境でコンテナを停止
 	docker compose -f $(DEVYAML) down
 help: ## ヘルプを表示

@@ -24,7 +24,8 @@ FROM base AS runner
 WORKDIR /app
 
 COPY --from=builder /app/public ./public
-# FIXME: add user & add standalone & add static
-COPY --from=builder /app/.next ./
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package.json ./package.json
 
-CMD ["node", "server.js"]
+CMD ["npm", "start"]

@@ -1,5 +1,5 @@
 services:
-  chatapp:
+  chatapp_local:
     container_name: chatapp_local
     image: chatapp_local
     build:

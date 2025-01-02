@@ -1,5 +1,5 @@
 services:
-  chatapp:
+  chatapp_dev:
     container_name: chatapp_develop
     image: chatapp_develop
     build:

@@ -15,7 +15,7 @@ login: ## local環境でコンテナに入る
 down: ## local環境でコンテナを停止
 	docker compose -f $(LOCALYAML) down
 dev: ## dev環境でコンテナを起動
-	docker compose -f $(DEVYAML) up
+	docker compose -f $(DEVYAML) up -d
 dev_build: ## dev環境でコンテナをビルド
 	docker compose -f $(DEVYAML) build --no-cache
 dev_ps: ## dev環境でコンテナの起動状況を確認

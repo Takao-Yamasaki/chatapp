@@ -35,9 +35,9 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
-  # TODO: Notionの整理
-  # TODO: nginxコンテナの作成
-  # TODO: 設定ファイルの作成
-  # TODO: 80Portの解放
-  # TODO: docker composeのサービス化
+- Notionの整理
+- nginxコンテナの作成
+- 設定ファイルの作成
+- 80Portの解放
+- docker composeのサービス化
 

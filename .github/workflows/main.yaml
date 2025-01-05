@@ -35,7 +35,6 @@ jobs:
             cd ${{ vars.WORKDIR }}
             git fetch --prune && git checkout ${{ vars.BRANCH }} && git pull origin ${{ vars.BRANCH }}
             
-            make dev_down
             make dev_build
             make dev
           EOF

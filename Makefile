@@ -7,7 +7,7 @@ DEVAPP := chatapp_dev
 .DEFAULT_GOAL := help
 
 local: ## local環境でコンテナを起動
-	docker compose -f $(LOCALYAML) up -d
+	docker compose -f $(LOCALYAML) up -d --remove-orphans
 build: ## local環境でコンテナをビルド
 	docker compose -f $(LOCALYAML) build --no-cache 
 ps: ## local環境でコンテナの起動確認
@@ -17,7 +17,7 @@ login: ## local環境でコンテナに入る
 down: ## local環境でコンテナを停止
 	docker compose -f $(LOCALYAML) down
 dev: ## dev環境でコンテナを起動
-	docker compose -f $(DEVYAML) up -d
+	docker compose -f $(DEVYAML) up -d --remove-orphans
 dev_build: ## dev環境でコンテナをビルド
 	docker compose -f $(DEVYAML) build --no-cache
 dev_ps: ## dev環境でコンテナの起動確認

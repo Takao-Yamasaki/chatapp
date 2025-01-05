@@ -3,6 +3,8 @@ name: EC2 auto deploy
 on:
   push:
     branches: [ main ]
+    paths-ignore:
+      - '**.md'
 
 jobs:
   build:

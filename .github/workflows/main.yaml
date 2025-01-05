@@ -15,11 +15,7 @@ jobs:
       - name: Public IP Install
         id: ip
         uses: haythem/public-ip@v1.3
-      
-      - name: Print Public IP
-        run: |
-          echo ${{ steps.ip.outputs.ipv4 }}
-      
+
       - name: Checkout
         uses: actions/checkout@v4
       

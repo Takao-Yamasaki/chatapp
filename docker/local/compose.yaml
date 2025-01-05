@@ -11,3 +11,16 @@ services:
     restart: always
     ports:
       - 3000:3000
+  nginx_local:
+    container_name: nginx_local
+    image: nginx:latest
+    build:
+      context: ../../
+      dockerfile: docker/local/Dockerfile
+    volumes:
+      - ../../nginx/local/nginx.conf:/etc/nginx/nginx.conf
+    restart: always
+    depends_on:
+      - chatapp_local
+    ports:
+      - 80:80

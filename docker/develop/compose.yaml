@@ -11,6 +11,9 @@ services:
   nginx_develop:
     container_name: nginx_develop
     image: nginx_develop
+    build:
+      context: ../../
+      dockerfile: docker/develop/nginx/Dockerfile
     restart: always
     depends_on:
       - chatapp_develop

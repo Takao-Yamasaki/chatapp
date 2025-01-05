@@ -14,9 +14,6 @@ services:
   nginx_local:
     container_name: nginx_local
     image: nginx:latest
-    build:
-      context: ../../
-      dockerfile: docker/local/Dockerfile
     volumes:
       - ../../nginx/local/nginx.conf:/etc/nginx/nginx.conf
     restart: always

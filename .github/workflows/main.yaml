@@ -1,0 +1,51 @@
+name: EC2 auto deploy
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: develop
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Public IP Install
+        id: ip
+        uses: haythem/public-ip@v1.3
+      
+      - name: Print Public IP
+        run: |
+          echo ${{ steps.ip.outputs.ipv4 }}
+      
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: ${{ secrets.AWS_REGION }}
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+      
+      - name: Deploy
+        run: |
+          aws ec2 authorize-security-group-ingress --group-id ${{ secrets.SECURITY_GROUP_ID }} --protocol tcp --port 22 --cidr ${{ steps.ip.outputs.ipv4}}/32
+          
+          echo "${{ secrets.PRIVATE_KEY }}" > private_key
+          chmod 600 private_key
+          ssh -oStrictHostKeyChecking=no ${{ secrets.USER_NAME }}@${{ secrets.HOST_NAME }} -i private_key << EOF
+            cd ${{ vars.WORKDIR }}
+            git fetch --prune && git checkout ${{ vars.BRANCH }} && git pull origin ${{ vars.BRANCH }}
+          EOF
+
+          aws ec2 revoke-security-group-ingress --group-id ${{ secrets.SECURITY_GROUP_ID }} --protocol tcp --port 22 --cidr ${{ steps.ip.outputs.ipv4 }}/32
+
+
+
+  # TODO: Notionの整理
+  # TODO: nginxコンテナの作成
+  # TODO: 設定ファイルの作成
+  # TODO: 80Portの解放
+  # TODO: docker composeのサービス化

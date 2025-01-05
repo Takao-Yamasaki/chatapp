@@ -1,10 +1,18 @@
 services:
-  chatapp_dev:
+  chatapp_develop:
     container_name: chatapp_develop
     image: chatapp_develop
     build:
       context: ../../
-      dockerfile: docker/develop/Dockerfile
+      dockerfile: docker/develop/chatapp/Dockerfile
     restart: always
     ports:
       - 3000:3000
+  nginx_develop:
+    container_name: nginx_develop
+    image: nginx_develop
+    restart: always
+    depends_on:
+      - chatapp_develop
+    ports:
+      - 80:80

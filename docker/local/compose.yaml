@@ -4,7 +4,7 @@ services:
     image: chatapp_local
     build:
       context: ../../
-      dockerfile: docker/local/Dockerfile
+      dockerfile: docker/local/chatapp/Dockerfile
     volumes:
       - ../../src:/app/src
       - ../../public:/app/public
@@ -13,9 +13,10 @@ services:
       - 3000:3000
   nginx_local:
     container_name: nginx_local
-    image: nginx:latest
-    volumes:
-      - ../../nginx/local/nginx.conf:/etc/nginx/nginx.conf
+    image: nginx_local
+    build:
+      context: ../../
+      dockerfile: docker/local/nginx/Dockerfile
     restart: always
     depends_on:
       - chatapp_local

@@ -34,6 +34,8 @@ jobs:
           ssh -oStrictHostKeyChecking=no ${{ secrets.USER_NAME }}@${{ secrets.HOST_NAME }} -i private_key << EOF
             cd ${{ vars.WORKDIR }}
             git fetch --prune && git checkout ${{ vars.BRANCH }} && git pull origin ${{ vars.BRANCH }}
+            
+            make dev_build && make dev
           EOF
 
           aws ec2 revoke-security-group-ingress --group-id ${{ secrets.SECURITY_GROUP_ID }} --protocol tcp --port 22 --cidr ${{ steps.ip.outputs.ipv4 }}/32

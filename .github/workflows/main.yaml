@@ -35,7 +35,9 @@ jobs:
             cd ${{ vars.WORKDIR }}
             git fetch --prune && git checkout ${{ vars.BRANCH }} && git pull origin ${{ vars.BRANCH }}
             
-            make dev_build && make dev
+            make dev_down
+            make dev_build
+            make dev
           EOF
 
           aws ec2 revoke-security-group-ingress --group-id ${{ secrets.SECURITY_GROUP_ID }} --protocol tcp --port 22 --cidr ${{ steps.ip.outputs.ipv4 }}/32
